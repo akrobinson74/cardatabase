@@ -14,86 +14,93 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 
 @Entity
-@JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@SuppressWarnings("unused")
 public class Owner {
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private Long ownerid;
-	private String firstname, lastname;
-	@JsonIgnore
-	@OneToMany(cascade=CascadeType.ALL, mappedBy="owner")
-	private List<Car> cars;
-	
-	public Owner() {
-	}
-	
-	public Owner(String firstname, String lastname) {
-		this.firstname = firstname;
-		this.lastname = lastname;
-	}
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  private Long ownerid;
 
-	public Owner(Owner other) {
-		this.ownerid = other.ownerid;
-		this.firstname = other.firstname;
-		this.lastname = other.lastname;
-		this.cars = other.cars;
-	}
+  private String firstname;
+  private String lastname;
 
-	public Long getOwnerid() {
-		return ownerid;
-	}
+  @JsonIgnore
+  @OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
+  private List<Car> cars;
 
-	public String getFirstname() {
-		return firstname;
-	}
+  public Owner() {}
 
-	public String getLastname() {
-		return lastname;
-	}
+  public Owner(String firstname, String lastname) {
+    this.firstname = firstname;
+    this.lastname = lastname;
+  }
 
-	public List<Car> getCars() {
-		return cars;
-	}
+  public Owner(Owner other) {
+    this.ownerid = other.ownerid;
+    this.firstname = other.firstname;
+    this.lastname = other.lastname;
+    this.cars = other.cars;
+  }
 
-	public void setFirstname(String firstname) {
-		this.firstname = firstname;
-	}
+  public Long getOwnerid() {
+    return ownerid;
+  }
 
-	public void setLastname(String lastname) {
-		this.lastname = lastname;
-	}
+  public String getFirstname() {
+    return firstname;
+  }
 
-	public void setCars(List<Car> cars) {
-		this.cars = cars;
-	}
-	
-	public void setOwnerid(Long ownerid) {
-		this.ownerid = ownerid;
-	}
+  public String getLastname() {
+    return lastname;
+  }
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(cars, firstname, lastname, ownerid);
-	}
+  public List<Car> getCars() {
+    return cars;
+  }
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Owner other = (Owner) obj;
-		return Objects.equals(cars, other.cars) && Objects.equals(firstname, other.firstname)
-				&& Objects.equals(lastname, other.lastname) && Objects.equals(ownerid, other.ownerid);
-	}
+  public void setFirstname(String firstname) {
+    this.firstname = firstname;
+  }
 
-	@Override
-	public String toString() {
-		return "Owner [ownerid=" + ownerid + ", firstname=" + firstname + ", lastname=" + lastname + ", cars=" + cars
-				+ "]";
-	}
-	
-	
+  public void setLastname(String lastname) {
+    this.lastname = lastname;
+  }
+
+  public void setCars(List<Car> cars) {
+    this.cars = cars;
+  }
+
+  public void setOwnerid(Long ownerid) {
+    this.ownerid = ownerid;
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(cars, firstname, lastname, ownerid);
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj) return true;
+    if (obj == null) return false;
+    if (getClass() != obj.getClass()) return false;
+    Owner other = (Owner) obj;
+    return Objects.equals(cars, other.cars)
+        && Objects.equals(firstname, other.firstname)
+        && Objects.equals(lastname, other.lastname)
+        && Objects.equals(ownerid, other.ownerid);
+  }
+
+  @Override
+  public String toString() {
+    return "Owner [ownerid="
+        + ownerid
+        + ", firstname="
+        + firstname
+        + ", lastname="
+        + lastname
+        + ", cars="
+        + cars
+        + "]";
+  }
 }
